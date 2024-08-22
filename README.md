@@ -35,14 +35,17 @@ just container_mgr=docker test-in-container
 This will log you into ZSH in a container (to not mess with your system) to test
 out the ZSH and Git settings and to get a look and feel of Chezmoi.
 
-### Init Chezmoi
+For the impatient do `just test-in-container --apply`, for the ones wanting a
+follow through jump through the next sections.
+
+### Initialize `chezmoi`
 
 ```shell
 cd ~/workspace
 chezmoi init ./
 ```
 
-### Apply all Config Files
+### Apply all Configuration Files
 
 ```
 cd ~/.local/config/chezmoi
