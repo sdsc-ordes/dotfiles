@@ -34,3 +34,37 @@ just container_mgr=docker test-in-container
 
 This will log you into ZSH in a container (to not mess with your system) to test
 out the ZSH and Git settings and to get a look and feel of Chezmoi.
+
+### Init Chezmoi
+
+```shell
+cd ~/workspace
+chezmoi init ./
+```
+
+### Apply all Config Files
+
+```
+cd ~/.local/config/chezmoi
+chezmoi apply
+```
+
+and inspect the changes with
+
+```shell
+tree ~/.config
+```
+
+### Login again into ZSH
+
+```shell
+zsh
+```
+
+Which will directly use all config files, install ZSH plugin on startup and
+present you with a nice prompt like this:
+
+```text
+╭─     ~/.local/share/chezmoi on    master ·······························································································   impure
+╰─❯
+```
