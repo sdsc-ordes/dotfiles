@@ -2,16 +2,18 @@ set positional-arguments
 set shell := ["bash", "-cue"]
 root_dir := justfile_directory()
 
+container_mgr := "podman"
+
 # Test the configuration in a container.
 test-in-container: build-image
     #!/usr/bin/env bash
-    podman run --rm -it \
+    "{{container_mgr}}" run --rm -it \
         -v "$(pwd):/workspace-tmp" \
         -w /workspace-tmp dotfiles:latest \
         ./tools/test.sh
 
 build-image:
-    podman build -f tools/ci/images/Containerfile . -t "dotfiles"
+    "{{container_mgr}}" build -f tools/ci/images/Containerfile . -t "dotfiles"
 
 # Apply all configs, also encrypted ones.
 apply-configs:
