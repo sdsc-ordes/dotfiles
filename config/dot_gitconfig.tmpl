@@ -1,0 +1,54 @@
+[core]
+    editor = nvim
+    ignorecase = false
+    autocrlf = false
+    symlinks = true
+    longpaths = true
+    abbrev = 10
+    fsmonitor = false
+    pager = delta
+[user]
+    name = {{ .git.userName | quote }}
+    email = {{ .git.userEmail | quote }}
+[delta]
+    features = user
+[commit]
+    gpgsign = false
+    template = {{ .git.configPath }}/commit-template.txt
+[tag]
+    gpgsign = false
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+[push]
+    autoSetupRemote = true
+    default = simple
+    followTags = false
+[include]
+    path = {{ .git.configPath }}/gitconfig-shared
+    path = {{ .git.configPath }}/gitconfig-tools
+    path = {{ .git.configPath }}/gitconfig-delta
+[init]
+    defaultBranch = main
+[filter "lfs"]
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+[diff]
+    tool = {{ .git.diffTool }}
+    guitool = {{ .git.diffTool }}
+    colorMoved = default
+[difftool]
+    prompt = false
+[merge]
+    tool = {{ .git.mergeTool }}
+    guitool = {{ .git.mergeTool }}
+    conflictstyle = diff3
+[mergetool]
+    prompt = false
+[pull]
+    ff = only
+[color]
+    ui = true
+[status]
+    showUntrackedFiles = all

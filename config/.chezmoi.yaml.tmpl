@@ -1,0 +1,22 @@
+{{- $choices := list "private" "work" -}}
+{{- $workspace:= promptChoiceOnce . "workspace" "Workspace?" $choices "private" -}}
+
+data:
+  # Any of `private`, `work`
+  workspace: {{ $workspace }}
+
+  # Git Setup.
+  git:
+    diffTool: vscode
+    mergeTool: vscode
+
+    configPath: {{ .chezmoi.homeDir }}/.config/git
+    toolsPath: {{ .chezmoi.homeDir }}/.config/git/tools
+
+    {{- if contains $workspace "work" }}
+    userEmail: Dotfiles@work.ch
+    userName: Dotfiles-Work
+    {{- else }}
+    userEmail: Dotfiles@home.ch
+    userName: Dotfiles-Home
+    {{- end }}

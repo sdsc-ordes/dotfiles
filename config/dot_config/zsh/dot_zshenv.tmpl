@@ -1,0 +1,19 @@
+# echo "Loading .zshenv ..."
+
+[ -n "$ZDOTDIR" ] || {
+    echo "You must set '$ZDOTDIR' to use this file."
+    return 0
+}
+
+# Make path unique.
+typeset -U path PATH
+
+# Set locale.
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+source "$ZDOTDIR/.zshenv-homebrew.zsh"
+source "$ZDOTDIR/.zshenv-go.zsh"
+source "$ZDOTDIR/.zshenv-node.zsh"
+source "$ZDOTDIR/.zshenv-rust.zsh"
+source "$ZDOTDIR/.zshenv-tools.zsh"
