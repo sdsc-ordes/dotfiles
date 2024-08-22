@@ -4,8 +4,6 @@
     <br>
 </h1>
 
-# Dotfiles Repo
-
 A starter repository to get you started with `chezmoi` and your precious config
 files on your system (dotfiles).
 
