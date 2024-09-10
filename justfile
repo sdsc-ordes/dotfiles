@@ -4,6 +4,11 @@ root_dir := justfile_directory()
 
 container_mgr := "podman"
 
+# This is a wrapper to `chezmoi`.
+[no-cd]
+cm *args:
+    chezmoi "$@"
+
 # Test the configuration in a container.
 test-in-container *args: build-image
     #!/usr/bin/env bash
@@ -18,38 +23,3 @@ build-image:
 # Apply all configs, also encrypted ones.
 apply-configs:
     just cm apply
-
-# Apply all configs but not encrypted ones.
-apply-configs-exclude-encrypted:
-    chezmoi apply --exclude encrypted
-
-# Encrypt a file using the encryptiong configured
-# in `.chezmoi.yaml`.
-# This is using the public key.
-[no-cd]
-encrypt file:
-    chezmoi encrypt "{{file}}"
-
-# Decrypt a file using the encryption configured.
-# You need `store-kefile-private-key` executed.
-# This does actually the following:
-# pkey=$(secret-tool lookup chezmoi keyfile-private-key 2>/dev/null) && \
-# echo "$pkey" | age -d -i - "{{root_dir}}/config/dot_config/chezmoi/key.age" | age -d -i - "{{file}}"
-[no-cd]
-decrypt file:
-    just cm decrypt {{file}}
-
-# Decrypt and edit the file.
-# You need `store-kefile-private-key` executed.
-[no-cd]
-decrypt-edit file:
-    just cm edit "{{file}}"
-
-# This is a wrapper to `chezmoi`.
-# TODO: The initial version provides the necessary encryption
-# key temporarily and deletes it afterwards again.
-# This is only used for invocations which need the private key.
-# This needs `store-kefile-private-key` to be run.
-[no-cd]
-cm *args:
-    chezmoi "$@"
