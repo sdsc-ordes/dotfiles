@@ -10,7 +10,7 @@ cm *args:
     chezmoi "$@"
 
 # Test the configuration in a container.
-test-in-container *args: build-image
+test *args: build-image
     #!/usr/bin/env bash
     "{{container_mgr}}" run --rm -it \
         -v "$(pwd):/workspace-tmp" \
