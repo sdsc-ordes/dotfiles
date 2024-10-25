@@ -17,6 +17,11 @@ test *args: build-image
         -w /workspace-tmp dotfiles:latest \
         ./tools/test.sh "$@"
 
+# Show the home folder in
+show-home:
+    #!/usr/bin/env bash
+    tree -L 2 -al -I workspace -I .cache -I .local ~
+
 build-image:
     "{{container_mgr}}" build -f tools/ci/images/Containerfile . -t "dotfiles"
 

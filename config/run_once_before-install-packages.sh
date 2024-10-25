@@ -10,5 +10,5 @@ function install_ubuntu_packages() {
 if [ "$CHEZMOI_OS_RELEASE_ID" = "ubuntu" ]; then
     install_ubuntu_packages
 else
-    echo "WARNING: Architecture '$CHEZMOI_OS' not supported for installing packages." >&2
+    echo "WARNING: Architecture '$CHEZMOI_OS_RELEASE_ID' not supported for installing packages." >&2
 fi

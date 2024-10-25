@@ -39,7 +39,7 @@ function main() {
     if [ "$apply" = "true" ]; then
         test
     else
-        exec bash
+        exec bash -i
     fi
 }
 
@@ -54,7 +54,7 @@ function test() {
 
     tree -L 2 ~/.config
 
-    exec zsh
+    exec zsh -i
 }
 
 main "$@"
