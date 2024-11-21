@@ -10,10 +10,22 @@ function install_ubuntu_packages() {
 function install_macos_packages() {
     echo "TODO: Add here some installation for macOS packages."
 
-    brew install git git-lfs coreutils findutils binutils gnu-sed gnu-tar gnu-time grep
+    if command -v brew &>/dev/null; then
+        brew install \
+            binutils \
+            coreutils \
+            findutils \
+            git \
+            git-lfs \
+            gnu-sed \
+            gnu-tar \
+            gnu-time \
+            bash \
+            grep
+    fi
 }
 
-if [ "$CHEZMOI_OS" = "darwin" ] ; then
+if [ "$CHEZMOI_OS" = "darwin" ]; then
     install_macos_packages
 elif [ "$CHEZMOI_OS_RELEASE_ID" = "ubuntu" ]; then
     install_ubuntu_packages
