@@ -101,16 +101,9 @@ if command direnv &>/dev/null; then
     eval "$(direnv hook zsh)"
 fi
 
-# Wezterm shell integration.
-if [ -n "$WEZTERM_EXECUTABLE" ]; then
-    if [ -f "$HOME/.config/wezterm/shell-integration.sh" ]; then
-        source "$HOME/.config/wezterm/shell-integration.sh"
-    fi
-fi
-
-# Fuzzy Find integration
-if command -v fzf &>/dev/null; then
-    source "$HOME/.config/fzf/fzf.zsh"
+# zoxide hook.
+if command -v zoxide &>/dev/null; then
+    eval "$(zoxide init zsh)"
 fi
 
 # Aliases
